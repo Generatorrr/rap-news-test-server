@@ -45,7 +45,7 @@ app.post('/', function (req, res) {
                 collection.find({}).toArray(function (mongoError, data) {
                     if (mongoError) throw mongoError;
                     for (let i = 0; i < data.length; i++) {
-                        if (data[i].id.hasOwnProperty(req.body.id)) {
+                        if (data[i].id === req.body.id) {
                             return res.send({
                                 title: 'Не жульничай. Голосовать можно только 1 раз. :)'
                             });
