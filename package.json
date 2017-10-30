@@ -1,7 +1,7 @@
 {
-  "name": "gamestorageserver",
+  "name": "Rap News Tournament",
   "version": "1.0.0",
-  "description": "Server for game results return",
+  "description": "Server for rap news test",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
