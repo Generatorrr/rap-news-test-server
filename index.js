@@ -39,37 +39,38 @@ app.post('/', function (req, res) {
             var collection = database.collection('results');
             assert.equal(null, err);
             console.log(req.body);
-            if(req.body.answers[0] === '1-3' && req.body.answers[1] === '2-1' && req.body.answers[2] === '3-2' && req.body.answers[3] === '4-4'&&
-                req.body.answers[4] === '5-1' && req.body.answers[5] === '6-3' && req.body.answers[6] === '7-2' && req.body.answers[7] === '8-2' &&
-                req.body.answers[8] === '9-1' && req.body.answers[9] === '10-1') {
-
-                collection.find({}).toArray(function (mongoError, data) {
-                    if (mongoError) throw mongoError;
-                    for (let i = 0; i < data.length; i++) {
-                        console.log(data[i]);
-                        if (data[i]['id'] === req.body.id) {
-                            return res.send({
-                                title: 'Не жульничай. Голосовать можно только 1 раз. :)'
-                            });
-                        }
+            collection.find({}).toArray(function (mongoError, data) {
+                if (mongoError) throw mongoError;
+                for (let i = 0; i < data.length; i++) {
+                    console.log(data[i]);
+                    if (data[i]['id'] === req.body.id) {
+                        return res.send({
+                            title: 'Не жульничай. Голосовать можно только 1 раз. :)'
+                        });
                     }
-                });
-                collection.insert({
-                    id: req.body.id,
-                    pass: 1
-                });
-                return res.send({
-                    title: 'success'
-                });
-            } else {
-                collection.insert({
-                    id: req.body.id,
-                    pass: 0
-                });
-                return res.send({
-                    title: 'success!'
-                });
-            }
+                }
+                if(req.body.answers[0] === '1-3' && req.body.answers[1] === '2-1' && req.body.answers[2] === '3-2' && req.body.answers[3] === '4-4'&&
+                    req.body.answers[4] === '5-1' && req.body.answers[5] === '6-3' && req.body.answers[6] === '7-2' && req.body.answers[7] === '8-2' &&
+                    req.body.answers[8] === '9-1' && req.body.answers[9] === '10-1') {
+
+                    collection.insert({
+                        id: req.body.id,
+                        pass: 1
+                    });
+                    return res.send({
+                        title: 'success'
+                    });
+                } else {
+                    collection.insert({
+                        id: req.body.id,
+                        pass: 0
+                    });
+                    return res.send({
+                        title: 'success!'
+                    });
+                }
+
+            });
         });
 
 });
