@@ -1,5 +1,5 @@
 {
-  "name": "Rap News Tournament",
+  "name": "rap-news-tournament",
   "version": "1.0.0",
   "description": "Server for rap news test",
   "main": "index.js",
